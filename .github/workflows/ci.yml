@@ -17,10 +17,10 @@ jobs:
           node-version: '18'
 
       - name: Install deps (app)
-        run: npm ci --prefix grant_v08
+        run: npm install
 
       - name: Start server and smoke /api/score
         run: |
-          npm --prefix grant_v08 start &
+          npm start &
           sleep 3
           curl -fS http://localhost:3000/api/score
