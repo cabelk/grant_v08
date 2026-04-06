@@ -56,3 +56,31 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report
+
+  scans:
+    needs: e2e
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install deps
+        run: npm install
+
+      - name: Generate synthetic scorecard (scaffold)
+        env:
+          CI_RUN_URL: ${{ github.event.workflow_run.html_url || format('https://github.com/{0}/actions/runs/{1}', github.repository, github.run_id) }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          node scripts/generate-scorecard.js
+
+      - name: Upload CI scorecard
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-scan-results
+          path: ci-scan-results/scorecard.json

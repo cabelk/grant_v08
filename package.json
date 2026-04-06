@@ -9,6 +9,9 @@
     "test": "jest --runInBand",
     "test:e2e": "playwright test --project=chromium --reporter=list"
   },
+  "scripts": {
+    "ci:generate-scorecard": "node scripts/generate-scorecard.js"
+  },
   "dependencies": {
     "express": "^4.18.2"
   },
