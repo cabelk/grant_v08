@@ -22,7 +22,15 @@ jobs:
       - name: Start server and smoke /api/score
         run: |
           npm start &
-          sleep 3
+          # wait up to 30s for server to respond
+          for i in {1..30}; do
+            if curl -sSf http://localhost:3000/api/score >/dev/null 2>&1; then
+              echo "server ready"
+              break
+            fi
+            echo "waiting for server... $i"
+            sleep 1
+          done
           curl -fS http://localhost:3000/api/score
 
   e2e:
