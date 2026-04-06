@@ -14,23 +14,30 @@ async function loadScores(){
 
 function renderScores(data){
   scoresEl.innerHTML = '';
-  const app = document.createElement('div');
-  app.className = 'score-item';
-  app.innerHTML = `<strong>App</strong><span>${data.appScore}</span>`;
-  scoresEl.appendChild(app);
-  const lom = document.createElement('div');
-  lom.className = 'score-item';
-  lom.innerHTML = `<strong>LOM</strong><span>${data.lomScore}</span>`;
-  scoresEl.appendChild(lom);
+  // header summary
+  const header = document.createElement('div');
+  header.className = 'score-item';
+  header.innerHTML = `<strong>App</strong><span>${data.appScore}</span>`;
+  scoresEl.appendChild(header);
+  const header2 = document.createElement('div');
+  header2.className = 'score-item';
+  header2.innerHTML = `<strong>LOM</strong><span>${data.lomScore}</span>`;
+  scoresEl.appendChild(header2);
+
   const list = document.createElement('div');
   list.style.marginTop = '8px';
   data.details.forEach(d => {
     const el = document.createElement('div');
     el.className = 'score-item';
-    el.innerHTML = `<span>${d.id} (${d.score}/${d.max})</span><a href="${d.evidence}" target="_blank">link</a>`;
+    const pct = Math.round((d.score / d.max) * 100);
+    el.innerHTML = `<div style="width:70%"><strong>${d.id}</strong><div class=\"scorebar\"><i style=\"width:${pct}%\"></i></div></div><div style=\"text-align:right;min-width:56px\">${d.score}/${d.max}<div><a href=\"${d.evidence}\" target=\"_blank\">evidence</a></div></div>`;
     list.appendChild(el);
   });
   scoresEl.appendChild(list);
+  const meta = document.createElement('div');
+  meta.className = 'meta';
+  meta.textContent = `Updated: ${new Date(data.generated_at).toLocaleString()}`;
+  scoresEl.appendChild(meta);
 }
 
 toggleBtn.addEventListener('click', ()=>{
