@@ -5,13 +5,13 @@ const path = require('path');
 test.describe('Scorecard smoke and a11y', () => {
   test('loads app and exposes scorecard', async ({ page }) => {
     await page.goto('http://localhost:3000');
-    await expect(page).toHaveTitle(/Grant/);
+    await expect(page).toHaveTitle(/Grant Tracker/);
 
-    // open scorecard if there's a toggle
-    const toggle = await page.$('#score-toggle');
+    // open/collapse scorecard if toggle exists
+    const toggle = await page.$('#toggle');
     if (toggle) await toggle.click();
 
-    const score = await page.$('#score-summary');
+    const score = await page.$('#scores');
     expect(score).not.toBeNull();
   });
 
