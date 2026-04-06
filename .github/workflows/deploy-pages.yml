@@ -18,13 +18,41 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
 
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./client
-          publish_branch: gh-pages
-          allow_empty_commit: false
-          clean: true
-          user_name: github-actions[bot]
-          user_email: 41898282+github-actions[bot]@users.noreply.github.com
+      - name: Deploy to gh-pages branch (scripted, with retry)
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          echo "Preparing deploy of ./client to gh-pages branch"
+          if [ ! -d client ]; then
+            echo "Publish directory './client' not found" >&2
+            exit 1
+          fi
+          DEPLOY_DIR=$(mktemp -d)
+          cp -r client/* "$DEPLOY_DIR/" || true
+          pushd "$DEPLOY_DIR"
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --all
+          git commit -m "gh-pages deploy: ${GITHUB_SHA}" || true
+          REMOTE_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git remote add origin "$REMOTE_URL"
+          RETRIES=3
+          ATTEMPT=0
+          until [ $ATTEMPT -ge $RETRIES ]
+          do
+            ATTEMPT=$((ATTEMPT+1))
+            echo "Push attempt $ATTEMPT/$RETRIES"
+            if git push --force origin HEAD:gh-pages; then
+              echo "Deploy succeeded"
+              exit 0
+            fi
+            echo "Push failed, retrying in $((ATTEMPT * 5))s..."
+            sleep $((ATTEMPT * 5))
+          done
+          echo "All deploy attempts failed" >&2
+          exit 1
