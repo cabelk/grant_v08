@@ -38,6 +38,16 @@ function renderScores(data){
   meta.className = 'meta';
   meta.textContent = `Updated: ${new Date(data.generated_at).toLocaleString()}`;
   scoresEl.appendChild(meta);
+
+  // CI evidence card
+  if (data.ci) {
+    const ciCard = document.createElement('div');
+    ciCard.className = 'ci-card';
+    const passed = data.ci.e2e_passed ? 'passed' : 'failed';
+    const runLink = data.ci.run_url ? `<a href="${data.ci.run_url}" target="_blank">CI run</a>` : 'CI run';
+    ciCard.innerHTML = `<strong>CI</strong><span class="ci-${passed}">${passed}</span><div style="font-size:12px;margin-top:6px">${runLink}</div>`;
+    scoresEl.appendChild(ciCard);
+  }
 }
 
 toggleBtn.addEventListener('click', ()=>{
