@@ -45,10 +45,32 @@ function renderScores(data){
     ciCard.className = 'ci-card';
     const passed = data.ci.e2e_passed ? 'passed' : 'failed';
     const runLink = data.ci.run_url ? `<a href="${data.ci.run_url}" target="_blank">CI run</a>` : 'CI run';
-    ciCard.innerHTML = `<strong>CI</strong><span class="ci-${passed}">${passed}</span><div style="font-size:12px;margin-top:6px">${runLink}</div>`;
+    ciCard.innerHTML = `<strong>CI</strong><span class="ci-${passed}">${passed}</span><div style="font-size:12px;margin-top:6px">${runLink} • <a href="#" id="viewScorecard">View scorecard</a></div>`;
     scoresEl.appendChild(ciCard);
   }
 }
+
+// Modal interactions for viewing CI scorecard JSON
+document.addEventListener('click', (ev) => {
+  if (ev.target && ev.target.id === 'viewScorecard') {
+    ev.preventDefault();
+    fetch('/api/score').then(r => r.json()).then(j => {
+      const modal = document.getElementById('modal');
+      const pre = document.getElementById('modalContent');
+      pre.textContent = JSON.stringify(j, null, 2);
+      modal.setAttribute('aria-hidden', 'false');
+    }).catch(() => alert('Failed to load scorecard'));
+  }
+});
+
+document.getElementById('modalClose').addEventListener('click', ()=>{
+  document.getElementById('modal').setAttribute('aria-hidden','true');
+});
+
+// close modal on backdrop click
+document.querySelector('.modal-backdrop').addEventListener('click', ()=>{
+  document.getElementById('modal').setAttribute('aria-hidden','true');
+});
 
 toggleBtn.addEventListener('click', ()=>{
   if (scorecard.style.height && scorecard.style.height !== '40px'){

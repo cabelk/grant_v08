@@ -22,3 +22,16 @@ header { border-bottom: 1px solid #ddd; padding-bottom: 1rem; margin-bottom: 1re
 .scorecard a { color: #9be7ff; text-decoration: none }
 .scorecard .meta { font-size: 12px; color: rgba(255,255,255,0.7); margin-top:8px }
 .score-item strong { display:block }
+
+/* CI badge */
+.ci-card { margin-top:10px; padding:8px; background:rgba(255,255,255,0.03); border-radius:6px }
+.ci-passed { color: #86efac; font-weight:700 }
+.ci-failed { color: #ff7b7b; font-weight:700 }
+
+/* Modal */
+.modal { display:none; position:fixed; inset:0; z-index:2000 }
+.modal[aria-hidden="false"] { display:block }
+.modal-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.5) }
+.modal-panel { position:relative; width:80%; max-width:800px; margin:6% auto; background:#fff; color:#000; border-radius:8px; padding:16px; box-shadow:0 10px 30px rgba(2,6,23,0.6) }
+.modal-close { position:absolute; right:8px; top:8px; border:0; background:transparent; font-size:20px }
+.modal pre { max-height:60vh; overflow:auto; background:#f6f8fa; padding:12px; border-radius:6px }
