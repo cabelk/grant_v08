@@ -7,9 +7,7 @@
     "start": "node server/index.js",
     "dev": "nodemon server/index.js",
     "test": "jest --runInBand",
-    "test:e2e": "playwright test --project=chromium --reporter=list"
-  },
-  "scripts": {
+    "test:e2e": "playwright test --project=chromium --reporter=list",
     "ci:generate-scorecard": "node scripts/generate-scorecard.js"
   },
   "dependencies": {
