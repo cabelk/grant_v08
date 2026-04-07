@@ -1,0 +1,28 @@
+name: Pages accessibility scan
+
+on:
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+      - name: Run axe scan against Pages
+        env:
+          PAGES_URL: ${{ inputs.pages_url || 'https://cabelk.github.io/grant_v08/' }}
+        run: |
+          node scripts/run-axe-pages.mjs
+      - name: Upload axe results
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-axe-results
+          path: lom/runtime/provenance/pages-axe-results.json
