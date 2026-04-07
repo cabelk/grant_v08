@@ -1,0 +1,14 @@
+{
+  "appScore": 82,
+  "lomScore": 88,
+  "details": [
+    { "id": "a11y", "score": 18, "max": 20, "evidence": "lom/runtime/provenance/pages-site.json" },
+    { "id": "tests", "score": 36, "max": 40, "evidence": "lom/runtime/provenance/actions-runs-latest.json" },
+    { "id": "security", "score": 28, "max": 40, "evidence": "lom/runtime/provenance/2026-04-06T13-05-00Z-ci-artifact-download.md" }
+  ],
+  "generated_at": "2026-04-06T23:00:00Z",
+  "ci": {
+    "e2e_passed": true,
+    "run_url": "https://github.com/cabelk/grant_v08/actions/runs/24032656517"
+  }
+}

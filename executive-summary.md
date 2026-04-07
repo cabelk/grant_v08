@@ -1,0 +1,17 @@
+Executive Summary
+- AERI: 61.05/100 (target 90)
+- Stage: phase0
+- Distance to target: 28.95
+- Active caps: unresolved_high_risks, product_terminal_minima_incomplete
+- Blocking gates: 1
+- Product minima: 0/5 PASS
+- Unresolved HIGH risks: 2
+- Top 3 next actions:
+  - Close C4 milestone governance evidence for current phase.
+  - Resolve or approve overrides for unresolved HIGH risks.
+  - Raise minima dimensions to meets_threshold=true across all 5 dimensions.
+- Evidence refs:
+  - lom/runtime/candidates/reports/app-builds/grant-tracker-build-20260401-phase0/promotion-readiness.json
+  - lom/runtime/candidates/artifacts/app-builds/grant-tracker-build-20260401-phase0/gate-snapshot.json
+  - lom/runtime/candidates/artifacts/app-builds/grant-tracker-build-20260401-phase0/product-terminal-minima-report.json
+  - lom/runtime/candidates/artifacts/app-builds/grant-tracker-build-20260401-phase0/risk-report.json

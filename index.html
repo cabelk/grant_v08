@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Grant Tracker — v08</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Grant Tracker (v08)</h1>
+    </header>
+    <main>
+      <p>Welcome — this is a scaffolded grant tracking app. Use the floating scorecard to see scores.</p>
+    </main>
+
+    <aside aria-label="Scorecard">
+      <div id="scorecard" class="scorecard">
+      <div class="handle">☰</div>
+      <button id="toggle" class="collapse">Collapse</button>
+      <h2>Score Summary</h2>
+      <button id="execToggle" class="exec-toggle">Executive Summary</button>
+      <div id="execSummary" class="exec-summary" style="display:none;max-height:220px;overflow:auto;padding:8px;margin-bottom:8px;background:#0b0f13;border-radius:6px;color:#fff;font-size:13px"></div>
+      <div id="scores">Loading…</div>
+      <div class="links">
+        <a href="lom/runtime/provenance/pages-site.json" id="siteEvidence" target="_blank">Site evidence</a>
+        &nbsp;•&nbsp;
+        <a href="lom/runtime/provenance/a11y-run-24070305635/pages-axe-results/pages-axe-results.json" id="axeEvidence" target="_blank">a11y results</a>
+      </div>
+      </div>
+    </aside>
+    </div>
+
+    <div id="modal" class="modal" aria-hidden="true">
+      <div class="modal-backdrop"></div>
+      <div class="modal-panel" role="dialog" aria-modal="true">
+        <button id="modalClose" class="modal-close">×</button>
+        <h4>CI Scorecard</h4>
+        <pre id="modalContent">Loading…</pre>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

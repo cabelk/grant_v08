@@ -1,0 +1,37 @@
+body { font-family: Arial, sans-serif; margin: 0; padding: 2rem; }
+header { border-bottom: 1px solid #ddd; padding-bottom: 1rem; margin-bottom: 1rem; }
+.scorecard {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  width: 320px;
+  background: linear-gradient(180deg,#1a1a1f,#0f1720);
+  color: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+  z-index: 1000;
+}
+.scorecard .handle { cursor: move; background: #000; padding: 0.25rem 0.5rem; border-radius: 4px; display:inline-block }
+.scorecard h3 { margin: 0.5rem 0; }
+.score-item { display:flex; justify-content:space-between; padding: 0.25rem 0; }
+.collapse { position:absolute; left:8px; top:8px; background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.15); padding:2px 6px; border-radius:4px }
+
+.scorebar { height:10px; background: rgba(255,255,255,0.08); border-radius:6px; overflow:hidden; margin-top:6px }
+.scorebar > i { display:block; height:100%; background: linear-gradient(90deg,#06b6d4,#7c3aed); }
+.scorecard a { color: #9be7ff; text-decoration: none }
+.scorecard .meta { font-size: 12px; color: rgba(255,255,255,0.7); margin-top:8px }
+.score-item strong { display:block }
+
+/* CI badge */
+.ci-card { margin-top:10px; padding:8px; background:rgba(255,255,255,0.03); border-radius:6px }
+.ci-passed { color: #86efac; font-weight:700 }
+.ci-failed { color: #ff7b7b; font-weight:700 }
+
+/* Modal */
+.modal { display:none; position:fixed; inset:0; z-index:2000 }
+.modal[aria-hidden="false"] { display:block }
+.modal-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.5) }
+.modal-panel { position:relative; width:80%; max-width:800px; margin:6% auto; background:#fff; color:#000; border-radius:8px; padding:16px; box-shadow:0 10px 30px rgba(2,6,23,0.6) }
+.modal-close { position:absolute; right:8px; top:8px; border:0; background:transparent; font-size:20px }
+.modal pre { max-height:60vh; overflow:auto; background:#f6f8fa; padding:12px; border-radius:6px }
