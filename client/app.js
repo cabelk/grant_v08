@@ -22,6 +22,31 @@ async function loadScores(){
   }
 }
 
+// Executive summary fetch & toggle
+const execToggle = document.getElementById('execToggle');
+const execSummary = document.getElementById('execSummary');
+execToggle.addEventListener('click', async () => {
+  if (execSummary.style.display === 'none') {
+    // load the markdown file and render simple formatting
+    try {
+      const r = await fetch('./executive-summary.md');
+      if (r.ok) {
+        const text = await r.text();
+        execSummary.textContent = text;
+      } else {
+        execSummary.textContent = 'Executive summary not available';
+      }
+    } catch (e) {
+      execSummary.textContent = 'Executive summary not available';
+    }
+    execSummary.style.display = 'block';
+    execToggle.textContent = 'Hide Executive Summary';
+  } else {
+    execSummary.style.display = 'none';
+    execToggle.textContent = 'Executive Summary';
+  }
+});
+
 function renderScores(data){
   scoresEl.innerHTML = '';
   // header summary
