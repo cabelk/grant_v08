@@ -83,6 +83,16 @@ function renderScores(data){
     ciCard.innerHTML = `<strong>CI</strong><span class="ci-${passed}">${passed}</span><div style="font-size:12px;margin-top:6px">${runLink} • <a href="#" id="viewScorecard">View scorecard</a></div>`;
     scoresEl.appendChild(ciCard);
   }
+
+  // Add a11y evidence link if present in provenance path
+  const a11yLink = document.querySelector('#axeEvidence');
+  if (a11yLink) {
+    const a11yDiv = document.createElement('div');
+    a11yDiv.style.fontSize = '12px';
+    a11yDiv.style.marginTop = '6px';
+    a11yDiv.innerHTML = `Accessibility evidence: <a href="${a11yLink.href}" target="_blank">axe results</a>`;
+    scoresEl.appendChild(a11yDiv);
+  }
 }
 
 // Modal interactions for viewing CI scorecard JSON
