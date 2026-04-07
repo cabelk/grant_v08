@@ -5,9 +5,19 @@ const scorecard = document.getElementById('scorecard');
 async function loadScores(){
   try{
     const r = await fetch('/api/score');
+    if (!r.ok) throw new Error('api failed');
     const j = await r.json();
     renderScores(j);
   } catch(e){
+    // fallback to bundled scorecard.json for static hosting (gh-pages)
+    try {
+      const r2 = await fetch('./scorecard.json');
+      if (r2.ok) {
+        const j2 = await r2.json();
+        renderScores(j2);
+        return;
+      }
+    } catch(_){}
     scoresEl.textContent = 'Error loading scores';
   }
 }
